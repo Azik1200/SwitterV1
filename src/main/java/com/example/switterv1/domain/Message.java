@@ -20,6 +20,16 @@ public class Message {
     private String text;
     private String tag;
 
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    private User author;
+
     public String getText() {
         return text;
     }
