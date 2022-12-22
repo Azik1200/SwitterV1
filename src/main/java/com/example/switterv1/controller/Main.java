@@ -1,4 +1,4 @@
-package com.example.switterv1;
+package com.example.switterv1.controller;
 
 import com.example.switterv1.domain.Message;
 import com.example.switterv1.repos.MessageRepo;
