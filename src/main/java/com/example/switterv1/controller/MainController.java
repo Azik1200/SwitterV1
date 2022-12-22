@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-public class Main {
+public class MainController {
 
     @Autowired
     private MessageRepo messageRepo;
