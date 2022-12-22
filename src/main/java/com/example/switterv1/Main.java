@@ -13,4 +13,10 @@ public class Main {
 
         return "home";
     }
+
+    @GetMapping("/main")
+    public String main(Map<String, Object> model) {
+
+        return "main";
+    }
 }
