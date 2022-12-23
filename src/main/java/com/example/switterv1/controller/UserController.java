@@ -1,5 +1,6 @@
 package com.example.switterv1.controller;
 
+import com.example.switterv1.domain.Role;
 import com.example.switterv1.domain.User;
 import com.example.switterv1.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class UserController {
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
+        model.addAttribute("roles", Role.values());
         return "userEdit";
     }
 }
