@@ -16,6 +16,7 @@ import java.util.Objects;
 public class RegistrationController {
     @Autowired
     private UserRepo userRepo;
+
     @GetMapping("/registration")
     public String registration() {
 
@@ -26,7 +27,7 @@ public class RegistrationController {
     public String addUser(User user, Map<String, Object> model) {
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
-        if(userFromDb !=  null){
+        if (userFromDb != null) {
             model.put("message", "Пользователь  таким именем существует!");
             return "registration";
         }
