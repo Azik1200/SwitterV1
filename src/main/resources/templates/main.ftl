@@ -29,7 +29,7 @@
             <strong>${message.authorName}</strong>
             <div>
                 <#if message.filename??>
-                    <img src="/C:/Users/99455/Desktop/uploads/${message.filename}">
+                    <img src="img/${message.filename}">
                 </#if>
             </div>
         </div>
