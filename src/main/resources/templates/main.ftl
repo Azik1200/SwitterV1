@@ -29,7 +29,7 @@
             <strong>${message.authorName}</strong>
             <div>
                 <#if message.filename??>
-                    <img src="img/${message.filename}">
+                    <img src="images/${message.filename}" alt="Если не отображается значит ты ЛОООООХ">
                 </#if>
             </div>
         </div>
