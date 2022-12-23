@@ -17,7 +17,7 @@ public class UserController {
     @GetMapping
     public String userList(Model model)
     {
-        model.addAttribute("user", userRepo.findAll());
+        model.addAttribute("users", userRepo.findAll());
         return "userList";
     }
 }
