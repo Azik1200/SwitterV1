@@ -9,6 +9,16 @@ public class Message {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    private String filename;
+
     public Message() {
     }
 
