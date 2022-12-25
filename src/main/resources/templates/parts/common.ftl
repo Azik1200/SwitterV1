@@ -11,8 +11,8 @@
               crossorigin="anonymous">
     </head>
     <body>
+    <#include "navbar.ftl">
     <div class="container mt-5">
-        <#include "navbar.ftl">
         <#nested >
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
