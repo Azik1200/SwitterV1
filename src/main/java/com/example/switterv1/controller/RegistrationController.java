@@ -1,21 +1,18 @@
 package com.example.switterv1.controller;
 
-import com.example.switterv1.domain.Role;
 import com.example.switterv1.domain.User;
-import com.example.switterv1.repos.UserRepo;
+import com.example.switterv1.service.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
 import java.util.Map;
-import java.util.Objects;
 
 @Controller
 public class RegistrationController {
     @Autowired
-    private UserRepo userRepo;
+    private UserSevice userSevice;
 
     @GetMapping("/registration")
     public String registration() {
@@ -25,16 +22,11 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {
-        User userFromDb = userRepo.findByUsername(user.getUsername());
 
-        if (userFromDb != null) {
+        if (!userSevice.addUser(user)) {
             model.put("message", "Пользователь  таким именем существует!");
             return "registration";
         }
-
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        userRepo.save(user);
 
         return "redirect:/login";
     }
