@@ -35,6 +35,6 @@ public class RegistrationController {
 
     @GetMapping("/activate/{code}")
     public String activate(Model model, @PathVariable String code) {
-        return "login"
+        return "login";
     }
 }
