@@ -41,14 +41,27 @@ public class UserSevice implements UserDetailsService {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Здравствуй, %s! \n" +
-                            "Добро пожаловать в Switter! Для активации Вашего аккаунта перейдите по ссылке : " +
-                            "http://localhost:8080/activate/$s",
-                    user.getUsername(),
-                    user.getActivationCode()
+
+                            "http://localhost:8080/activate/" + user.getActivationCode(),
+                    user.getUsername()
             );
 
             mailSender.send(user.getEmail(), "Activation Code", message);
         }
+
+        return true;
+    }
+
+    public boolean activateUser(String code) {
+        User user = userRepo.findByActivationCode(code);
+
+        if (user == null) {
+            return false;
+        }
+
+        user.setActivationCode(null);
+
+        userRepo.save(user);
 
         return true;
     }
