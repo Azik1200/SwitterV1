@@ -1,0 +1,22 @@
+spring:
+  freemarker:
+    expose-request-attributes: true
+    suffix: .ftl
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_example
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.yandex.ru
+    username: sswitter@yandex.ru
+    password: kakauzquhfuiaaii
+    port: 465
+    protocol: smtps
+upload:
+  path: /C:/upload
+mail:
+  debug: true
