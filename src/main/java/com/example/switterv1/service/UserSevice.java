@@ -15,11 +15,14 @@ import java.util.UUID;
 
 @Service
 public class UserSevice implements UserDetailsService {
-    @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
-    @Autowired
-    private MailSender mailSender;
+    private final MailSender mailSender;
+
+    public UserSevice(UserRepo userRepo, MailSender mailSender) {
+        this.userRepo = userRepo;
+        this.mailSender = mailSender;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

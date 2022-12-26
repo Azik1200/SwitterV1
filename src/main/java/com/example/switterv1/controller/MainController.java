@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,17 +24,21 @@ public class MainController {
     @Value("${upload.path}")
     private String uploadPath;
 
-    @Autowired
-    private MessageRepo messageRepo;
 
+    private final MessageRepo messageRepo;
+
+    public MainController(MessageRepo messageRepo) {
+        this.messageRepo = messageRepo;
+    }
+    //TODO Смотри сюда и меняй так же.
     @GetMapping
-    public String greeting(Map<String, Object> model) {
+    public ModelAndView greeting(Map<String, Object> model) {
 
-        return "home";
+        return new ModelAndView("home");
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+    public ModelAndView main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
 
         Iterable<Message> messages = messageRepo.findAll();
         if (filter != null && !filter.isEmpty()) {
@@ -44,11 +49,11 @@ public class MainController {
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
 
-        return "main";
+        return new ModelAndView( "main");
     }
 
     @PostMapping("/main")
-    public String add(
+    public ModelAndView add(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
             @RequestParam String tag, Map<String, Object> model,
@@ -77,12 +82,12 @@ public class MainController {
 
         model.put("messages", messages);
 
-        return "main";
+        return new ModelAndView("main");
     }
 
     @PostMapping("/filter")
-    public String filter(@RequestParam String filter, Map<String, Object> model) {
+    public ModelAndView filter(@RequestParam String filter, Map<String, Object> model) {
         Iterable<Message> messages;
-        return "main";
+        return new ModelAndView("main");
     }
 }
