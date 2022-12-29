@@ -1,6 +1,7 @@
 package com.example.switterv1.config;
 
 import com.example.switterv1.service.UserSevice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,24 +17,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Bean
-    public PasswordEncoder getPasswordEncoder(){
-        return new BCryptPasswordEncoder(8);
-    }
+    @Autowired
+    private UserSevice userSevice;
 
-    private final PasswordEncoder passwordEncoder;
-    private final UserSevice userSevice;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public WebSecurityConfig(PasswordEncoder passwordEncoder, UserSevice userSevice) {
-        this.passwordEncoder = passwordEncoder;
-        this.userSevice = userSevice;
+    @Bean(name = "passwordEncoder")
+    public static PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/registration","/static/**", "/activate/*").permitAll()
+                .antMatchers("/", "/registration", "/static/**", "/activate/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -15,18 +16,24 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserSevice implements UserDetailsService {
-    private final UserRepo userRepo;
+    @Autowired
+    private UserRepo userRepo;
 
-    private final MailSender mailSender;
+    @Autowired
+    private MailSender mailSender;
 
-    public UserSevice(UserRepo userRepo, MailSender mailSender) {
-        this.userRepo = userRepo;
-        this.mailSender = mailSender;
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.findByUsername(username);
+        User user = userRepo.findByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user;
     }
 
     public boolean addUser(User user) {
@@ -35,9 +42,11 @@ public class UserSevice implements UserDetailsService {
         if (userFromDb != null) {
             return false;
         }
+
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepo.save(user);
 
@@ -49,13 +58,13 @@ public class UserSevice implements UserDetailsService {
     private void sendMessage(User user) {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
-                    "Здравствуй, %s! \n" +
-
-                            "http://localhost:8080/activate/" + user.getActivationCode(),
-                    user.getUsername()
+                    "Hello, %s! \n" +
+                            "Welcome to Sweater. Please, visit next link: http://localhost:8080/activate/%s",
+                    user.getUsername(),
+                    user.getActivationCode()
             );
 
-            mailSender.send(user.getEmail(), "Activation Code", message);
+            mailSender.send(user.getEmail(), "Activation code", message);
         }
     }
 
@@ -98,7 +107,8 @@ public class UserSevice implements UserDetailsService {
     public void updateProfile(User user, String password, String email) {
         String userEmail = user.getEmail();
 
-        boolean isEmailChanged = (email != null && !email.equals(userEmail)) || (userEmail != null && !userEmail.equals(email));
+        boolean isEmailChanged = (email != null && !email.equals(userEmail)) ||
+                (userEmail != null && !userEmail.equals(email));
 
         if (isEmailChanged) {
             user.setEmail(email);
