@@ -1,6 +1,9 @@
 package com.example.switterv1.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Message {
@@ -27,7 +30,8 @@ public class Message {
         this.text = text;
         this.tag = tag;
     }
-
+    @NotBlank(message = "Пожалуйста, заполни поле")
+    @Length(max = 2048, message = "Слишком длинное сообщение (больше чем 2kB)")
     private String text;
     private String tag;
 
@@ -46,7 +50,6 @@ public class Message {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
-
     public String getText() {
         return text;
     }
