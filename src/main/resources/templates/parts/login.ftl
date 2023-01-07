@@ -18,12 +18,18 @@
             </div>
         </div>
         <#if isRegisterForm>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Эл. почта</label>
-            <div class="col-sm-6">
-                <input type="email" name="email" class="form-control" placeholder="Эл.почта"/>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Повторить пароль :</label>
+                <div class="col-sm-6">
+                    <input type="password2" name="password2" class="form-control" placeholder="Повторите Пароль"/>
+                </div>
             </div>
-        </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Эл. почта :</label>
+                <div class="col-sm-6">
+                    <input type="email" name="email" class="form-control" placeholder="Эл.почта"/>
+                </div>
+            </div>
         </#if>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button class="btn btn-primary" type="submit"><#if isRegisterForm>Регистрация<#else>Войти</#if></button>
