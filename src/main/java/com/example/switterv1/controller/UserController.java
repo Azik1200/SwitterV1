@@ -14,7 +14,6 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
-@PreAuthorize("hasAnyAuthority('ADMIN')")
 public class UserController {
 
     private final UserSevice userSevice;
