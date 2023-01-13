@@ -84,16 +84,20 @@ public class MainController {
                 message.setFilename(resultFilename);
             }
 
+            model.addAttribute("message", null);
 
             messageRepo.save(message);
         }
+
         Iterable<Message> messages = messageRepo.findAll();
 
         model.addAttribute("messages", messages);
 
-        return new ModelAndView("main");
-    }
+        return new
 
+                ModelAndView("main");
+
+    }
 
 
     @PostMapping("/filter")

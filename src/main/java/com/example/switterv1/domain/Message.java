@@ -7,6 +7,9 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Message {
+    public void setId(Long id) {
+        this.id = id;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -33,6 +36,9 @@ public class Message {
     @NotBlank(message = "Пожалуйста, заполни поле")
     @Length(max = 2048, message = "Слишком длинное сообщение (больше чем 2kB)")
     private String text;
+
+    @NotBlank(message = "Пожалуйста, заполни поле")
+    @Length(max = 2048, message = "Слишком длинное сообщение (больше чем 2kB)")
     private String tag;
 
     public User getAuthor() {
