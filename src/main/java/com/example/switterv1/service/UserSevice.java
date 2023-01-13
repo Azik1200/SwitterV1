@@ -30,7 +30,7 @@ public class UserSevice implements UserDetailsService {
         User user = userRepo.findByUsername(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("Пользователь не найден!");
         }
 
         return user;

@@ -31,7 +31,7 @@ public class RegistrationController {
     @PostMapping("/registration")
     public ModelAndView addUser(@Valid User user, BindingResult bindingResult, Model model) {
         if (user.getPassword() != null && user.getPassword().equals(user.getPassword2())) {
-            model.addAttribute("passwordError", "Пароли не совпадают");
+            model.addAttribute("passwordError", "Пароли не совпадают!");
         }
 
         if (bindingResult.hasErrors()) {
@@ -44,6 +44,7 @@ public class RegistrationController {
 
         if (!userSevice.addUser(user)) {
             model.addAttribute("usernameError", "Пользователь  таким именем существует!");
+
             return new ModelAndView("registration");
         }
 
