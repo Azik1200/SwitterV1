@@ -25,3 +25,5 @@ upload:
   path: /C:/upload
 mail:
   debug: true
+recaptcha:
+  secret: 6LcN8_YjAAAAACGfplRJeFIyTsg-64i6hN28UsmO

@@ -8,7 +8,8 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Имя пользователя :</label>
             <div class="col-sm-6">
-                <input type="text" name="username" class="form-control ${(usernameError??)?string('is-invalid', '')}" placeholder="Имя пользователя"/>
+                <input type="text" name="username" class="form-control ${(usernameError??)?string('is-invalid', '')}"
+                       placeholder="Имя пользователя"/>
                 <#if usernameError??>
                     <div class="invalid-feedback">
                         ${usernameError}
@@ -19,7 +20,8 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Пароль :</label>
             <div class="col-sm-6">
-                <input type="password" name="password" class="form-control ${(passwordError??)?string('is-invalid', '')}" placeholder="Пароль"/>
+                <input type="password" name="password"
+                       class="form-control ${(passwordError??)?string('is-invalid', '')}" placeholder="Пароль"/>
                 <#if passwordError??>
                     <div class="invalid-feedback">
                         ${passwordError}
@@ -31,7 +33,9 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Повторить пароль :</label>
                 <div class="col-sm-6">
-                    <input type="password" name="password2" class="form-control ${(password2Error??)?string('is-invalid', '')}" placeholder="Повторите Пароль"/>
+                    <input type="password" name="password2"
+                           class="form-control ${(password2Error??)?string('is-invalid', '')}"
+                           placeholder="Повторите Пароль"/>
                     <#if password2Error??>
                         <div class="invalid-feedback">
                             ${password2Error}
@@ -42,13 +46,22 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Эл. почта :</label>
                 <div class="col-sm-6">
-                    <input type="email" name="email" class="form-control  ${(emailError??)?string('is-invalid', '')}" placeholder="Эл.почта"/>
+                    <input type="email" name="email" class="form-control  ${(emailError??)?string('is-invalid', '')}"
+                           placeholder="Эл.почта"/>
                     <#if emailError??>
                         <div class="invalid-feedback">
                             ${emailError}
                         </div>
                     </#if>
                 </div>
+            </div>
+            <div>
+                <div class="g-recaptcha" data-sitekey="6LcN8_YjAAAAAHGlWott4LIUgx-jh8E49IExEdMq"></div>
+                <#if captchaError??>
+                    <div class="alert alert-danger" role="alert">
+                        ${captchaError}
+                    </div>
+                </#if>
             </div>
         </#if>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
