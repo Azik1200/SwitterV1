@@ -31,10 +31,10 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Повторить пароль :</label>
                 <div class="col-sm-6">
-                    <input type="password" name="password2" class="form-control ${(passwordError??)?string('is-invalid', '')}" placeholder="Повторите Пароль"/>
-                    <#if passwordError??>
+                    <input type="password" name="password2" class="form-control ${(password2Error??)?string('is-invalid', '')}" placeholder="Повторите Пароль"/>
+                    <#if password2Error??>
                         <div class="invalid-feedback">
-                            ${passwordError}
+                            ${password2Error}
                         </div>
                     </#if>
                 </div>

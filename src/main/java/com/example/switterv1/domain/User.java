@@ -21,17 +21,6 @@ public class User implements UserDetails {
     @NotBlank(message = "Не оставляй поле пустым")
     private String password;
 
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
-
-    @NotBlank(message = "Не оставляй поле пустым")
-    @Transient
-    private String password2;
     private boolean active;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
