@@ -1,3 +1,4 @@
+<#include "security.ftl">
 
 <div class="card-columns">
     <#list messages as message>
@@ -7,10 +8,14 @@
             </#if>
             <div class="m-2">
                 <span>${message.text}</span>
-                <i>${message.tag}</i>
+                <br />
+                <i>#${message.tag}</i>
             </div>
             <div class="card-footer text-muted">
-                ${message.authorName}
+                <a href="/user-messages/${message.author.id}"> ${message.authorName} </a>
+                <#if message.author.id == currentUserId || isAdmin>
+                <a href="/user-messages/${message.author.id}?message=${message.id}" class="btn btn-primary">Изменить</a>
+                </#if>
             </div>
         </div>
     <#else>
