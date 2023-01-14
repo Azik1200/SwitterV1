@@ -1,4 +1,8 @@
 spring:
+  session:
+    jdbc:
+      initialize-schema: always
+      table-name: SPRING_SESSION
   main:
     allow-circular-references: true
   freemarker:
