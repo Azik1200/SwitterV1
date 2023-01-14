@@ -137,16 +137,17 @@ public class MainController {
             @RequestParam("text") String text,
             @RequestParam("tag") String tag,
             @RequestParam("file") MultipartFile file
-            ) throws IOException {
-        if (!StringUtils.isEmpty(text)) {
-            message.setText(text);
+    ) throws IOException {
+        if (message.getAuthor().equals(currentUser)) {
+            if (!StringUtils.isEmpty(text)) {
+                message.setText(text);
+            }
+
+            if (!StringUtils.isEmpty(tag)) {
+                message.setTag(tag);
+            }
         }
 
-        if (!StringUtils.isEmpty(tag)) {
-            message.setTag(tag);
-        }
-
-        message.getTag();
 
         saveFile(message, file);
 
